@@ -9,5 +9,5 @@ CREATE TABLE IF NOT EXISTS tasks (
     id INT PRIMARY KEY AUTO_INCREMENT,
     task_name VARCHAR(30),
     status ENUM("To Do", "In Progress", "Done"),
-    create_at DATETIME NOW()
+    create_at DATETIME DEFAULT NOW()
 )

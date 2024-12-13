@@ -60,3 +60,7 @@
     </main>
 </body>
 </html>
+
+<?php
+    include("./DataBase/db.php");
+?>
