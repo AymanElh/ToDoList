@@ -11,3 +11,5 @@ CREATE TABLE IF NOT EXISTS tasks (
     status ENUM("To Do", "In Progress", "Done"),
     create_at DATETIME DEFAULT NOW()
 )
+
+ALTER TABLE tasks MODIFY status ENUM("Todo", "Done");
