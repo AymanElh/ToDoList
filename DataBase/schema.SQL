@@ -12,4 +12,8 @@ CREATE TABLE IF NOT EXISTS tasks (
     create_at DATETIME DEFAULT NOW()
 )
 
-ALTER TABLE tasks MODIFY status ENUM("Todo", "Done");
+ALTER TABLE tasks MODIFY isComplete TINYINT(1);
+
+ALTER TABLE tasks RENAME COLUMN status TO isComplete;
+
+UPDATE tasks SET `isComplete` = 0;
