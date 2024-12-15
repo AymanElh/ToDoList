@@ -1,6 +1,6 @@
 <?php 
 
-    include("./DataBase/db.php");
+    include("../DataBase/db.php");
     if(isset($_GET["task_id"])) {
         $taskID = $_GET["task_id"];
         $update_query = "UPDATE tasks SET isComplete = 1 WHERE id = {$taskID}";

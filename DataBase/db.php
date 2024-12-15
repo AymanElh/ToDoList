@@ -1,7 +1,7 @@
 <?php
     $db_sever = "localhost";
     $db_user = "root";
-    $db_password = "ayman@2003";
+    $db_password = "password";
     $db_name = "todo_list";
     $conn = "";
 

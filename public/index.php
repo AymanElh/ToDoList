@@ -1,5 +1,5 @@
 <?php
-    include("./DataBase/db.php");
+    include("../DataBase/db.php");
 
     $query = "SELECT * FROM tasks ORDER BY create_at DESC";
     $result = mysqli_query($conn, $query);
