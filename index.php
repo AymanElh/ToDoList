@@ -4,6 +4,7 @@
     $query = "SELECT * FROM tasks ORDER BY create_at DESC";
     $result = mysqli_query($conn, $query);
 
+    //add the task
     if(isset($_POST["submit-btn"])) {
         $task = $_POST["task"];
         $query = "INSERT INTO tasks (task_name, status, create_at) VALUES ('{$task}', 'ToDo', NOW())";
@@ -75,23 +76,26 @@
                                     <span class="text-green-500 font-bold">Yes</span>
                                 </td>
                                 <td class="px-4 py-2">
-                                    <button class="bg-green-500 text-white px-4 py-1 mr-2 rounded hover:bg-green-600">Complete</button>
-                                    <button class="bg-red-500 text-white px-4 py-1 mr-2 rounded hover:bg-red-600">Delete</button>
+                                    <button type="submit" name="complete-btn" class="bg-green-500 text-white px-4 py-1 mr-2 rounded hover:bg-green-600">Complete</button>
+                                    <button type="submit" name="delete-btn" class="bg-red-500 text-white px-4 py-1 mr-2 rounded hover:bg-red-600">Delete</button>
                                 </td>
                             </tr>
                             <?php
                                 if (mysqli_num_rows($result) > 0) {
+                                    $count = 1;
                                     while ($row = mysqli_fetch_assoc($result)) {
                                         echo '<tr class="border-t border-gray-700">';
-                                        echo '<td class="px-4 py-2">' . $row['id'] . '</td>';
+                                        echo '<td class="px-4 py-2">' . $count++ . '</td>';
                                         echo '<td class="px-4 py-2">' . $row['task_name'] . '</td>';
-                                        
-                                        echo '<td class="px-4 py-2"><span class="text-red-500 font-bold">No</span></td>';
-
+                                        if(!$row['isComplete']) { 
+                                            echo '<td class="px-4 py-2"><span class="text-red-500 font-bold">No</span></td>';
+                                        } else {
+                                            echo '<td class="px-4 py-2"><span class="text-green-500 font-bold">Yes</span></td>';
+                                        }
                                         // Display action buttons (Complete/Delete)
                                         echo '<td class="px-4 py-2">';
-                                        echo '<button class="bg-green-500 text-white px-4 py-1 mr-2 rounded hover:bg-green-600">Complete</button>';
-                                        echo '<button class="bg-red-500 text-white px-4 py-1 mr-2 rounded hover:bg-red-600">Delete</button>';
+                                            echo '<a href="complete.php?task_id=' . $row['id'] . '"  class="bg-green-500 text-white px-4 py-1 mr-2 rounded hover:bg-green-600">Complete</a>';    
+                                            echo '<a href="delete.php?task_id=' . $row['id'] . '" class="bg-red-500 text-white px-4 py-1 mr-2 rounded hover:bg-red-600">Delete</a>';
                                         echo '</td>';
                                         echo '</tr>';
                                     }
