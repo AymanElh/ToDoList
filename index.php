@@ -69,17 +69,6 @@
                         </thead>
                         <tbody>
                             <!-- Tasks -->
-                            <tr class="border-t border-gray-700">
-                                <td class="px-4 py-2">1</td>
-                                <td class="px-4 py-2">Example Task</td>
-                                <td class="px-4 py-2">
-                                    <span class="text-green-500 font-bold">Yes</span>
-                                </td>
-                                <td class="px-4 py-2">
-                                    <button type="submit" name="complete-btn" class="bg-green-500 text-white px-4 py-1 mr-2 rounded hover:bg-green-600">Complete</button>
-                                    <button type="submit" name="delete-btn" class="bg-red-500 text-white px-4 py-1 mr-2 rounded hover:bg-red-600">Delete</button>
-                                </td>
-                            </tr>
                             <?php
                                 if (mysqli_num_rows($result) > 0) {
                                     $count = 1;
