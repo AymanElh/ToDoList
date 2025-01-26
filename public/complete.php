@@ -1,21 +1,28 @@
-<?php 
+<?php
 
-    include("../DataBase/db.php");
-    if(isset($_GET["task_id"])) {
-        $taskID = $_GET["task_id"];
-        $update_query = "UPDATE tasks SET isComplete = 1 WHERE id = {$taskID}";
+require '../includes/config.php';
+require '../includes/functions.php';
 
-        try {
-            mysqli_query($conn, $update_query);
-            echo "Task updated successfully <br>";
-        } catch(mysqli_sql_exception) {
-            echo "Error: " . mysqli_error($conn);
-        }
+$conn = connection();
 
-        header("Location: index.php");
-        exit();
+// complete the task
+if (isset($_POST["task_id"])) {
+    $taskID = $_POST["task_id"];
+
+    $result = updateRecord($conn, 'tasks', ['isComplete' => 1], $taskID);
+
+    if ($result) {
+        echo json_encode([
+            "success" => true,
+            "message" => "Task completed",
+            "task_id" => $taskID
+        ]);
+    } else {
+        echo json_encode([
+            "success" => true,
+            "message" => "Database Error"
+        ]);
     }
-
-    $mysqli_close($conn);
-
-?>
+} else {
+    echo json_encode(["success" => false, "message" => "invalid Id"]);
+}

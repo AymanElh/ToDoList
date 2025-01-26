@@ -19,6 +19,7 @@ A simple and user-friendly To-Do List application built using **PHP**, **MySQL**
 - **MySQL**: Database for storing tasks.
 - **TailwindCSS**: For responsive and modern styling.
 - **HTML/CSS**: Structuring and styling the frontend.
+- **AJAX**: For asynchronous task updates without reloading the page.
 
 ---
 
@@ -37,7 +38,7 @@ Follow these steps to set up the project locally:
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-username/ToDoList.git
+   git clone https://github.com/AymanElh/ToDoList.git
    cd ToDoList
    ```
 
@@ -65,14 +66,20 @@ Follow these steps to set up the project locally:
 
 ```
 project/
-├── DataBase/
-│   ├── db.php          # Database connection file
-│   ├── schema.sql      # SQL file to set up the database
-├── public/
-│   ├── index.php       # Main application page
-│   ├── complete.php    # Mark tasks as complete
-│   ├── delete.php      # Delete tasks
-├── README.md           # Project documentation
+    └── 📁DataBase
+        └── schema.SQL      # Database schema
+    └── 📁includes
+        └── config.php      # Database connection
+        └── functions.php   # Dynamic Crud functions
+    └── 📁js
+        └── scripts.js      # AJAX requests
+    └── 📁public
+        └── add.php         # Add a new task
+        └── complete.php    # Mark task as complete
+        └── delete.php      # Delete a task
+        └── fetchTasks.php  # Fetch tasks from the database
+    └── index.php
+    └── README.md         # Project documentation
 ```
 
 ---
@@ -96,10 +103,3 @@ project/
 ## License
 
 This project is licensed under the MIT License. Feel free to use, modify, and distribute it as needed.
-
----
-
-## Acknowledgments
-
-- **TailwindCSS** for providing a sleek design framework.
-- Online tutorials and documentation for PHP and MySQL.

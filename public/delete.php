@@ -1,21 +1,29 @@
-<?php 
+<?php
 
-    include("../DataBase/db.php");
-    if(isset($_GET["task_id"])) {
-        $taskID = $_GET["task_id"];
-        $update_query = "DELETE FROM tasks WHERE id = {$taskID}";
+require '../includes/config.php';
+require '../includes/functions.php';
 
-        try {
-            mysqli_query($conn, $update_query);
-            echo "Task deleted successfully <br>";
-        } catch(mysqli_sql_exception) {
-            echo "Error: " . mysqli_error($conn);
-        }
+$conn = connection();
 
-        header("Location: index.php");
-        exit();
+// delete the task
+if (isset($_GET["task_id"])) {
+    $taskID = (int)$_GET["task_id"];
+
+    $result = deleteRecord($conn, 'tasks', $taskID);
+
+    if ($result) {
+
+        echo json_encode([
+            "success" => true,
+            "message" => "Task Deleted",
+            "task_id" => $taskID
+        ]);
+    } else {
+        echo json_encode([
+            "success" => false,
+            "message" => "task deletion failed"
+        ]);
     }
-
-    $mysqli_close($conn);
-
-?>
+} else {
+    echo json_encode(["success" => false, "message" => "Invalid Id"]);
+}
